@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Ruang Ayat Beraksi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: manipulation;
+        }
+        .scale-arm {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center 12px;
+        }
+        .pan {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bounce-btn:active {
+            transform: scale(0.92);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+                <i class="fas fa-store"></i> Ruang Ayat Beraksi
+            </h1>
+            
+            <!-- Stepper -->
+            <div class="flex items-center gap-2 text-xs sm:text-sm font-medium">
+                <button id="step-1-btn" onclick="navigateTo('step-game')" class="flex items-center gap-1 bg-indigo-800 text-white px-3 py-1.5 rounded-full border border-indigo-400">
+                    <span>1. Game</span>
+                </button>
+                <i class="fas fa-chevron-right text-indigo-300 text-xs"></i>
+                <button id="step-2-btn" onclick="navigateTo('step-video')" class="flex items-center gap-1 bg-indigo-500 opacity-60 text-white px-3 py-1.5 rounded-full" disabled>
+                    <span>2. Video</span>
+                </button>
+                <i class="fas fa-chevron-right text-indigo-300 text-xs"></i>
+                <button id="step-3-btn" onclick="navigateTo('step-refleksi')" class="flex items-center gap-1 bg-indigo-500 opacity-60 text-white px-3 py-1.5 rounded-full" disabled>
+                    <span>3. Refleksi</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-3xl w-full mx-auto p-4 flex flex-col justify-center">
+
+        <!-- STAGE 1: GAME MENAKAR BUAH -->
+        <section id="step-game" class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 text-center transition-all duration-300">
+            <divCodingan yang kita gunakan di atas adalah kode **HTML tunggal (*Single File*)** yang sudah menggabungkan **CSS** (untuk desain tampilan & animasi) dan **JavaScript** (untuk logika game & alur berpindah halaman).
+
+Supaya kodenya bisa diakses siswa via link HP, Anda cukup menyimpan kode di bawah ini menjadi file bernama `index.html` lalu mengunggahnya secara gratis ke **GitHub Pages**, **Vercel**, atau **Netlify** (penjelasan caranya ada di bagian bawah kode).
+
+Berikut kode lengkapnya:
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#4F46E5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Ruang Ayat Beraksi</title>
+  
+  <!-- Font Google & Tailwind CSS CDN -->
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap)" rel="stylesheet">
+  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+  <script src="[https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js](https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js)"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Timbangan CSS */
+    .scale-beam {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center center;
+    }
+    .plate {
+      transition: transform 0.4s ease;
+    }
+    
+    /* Smooth transition antar section */
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between select-none">
+
+  <!-- HEADER & STEPPER -->
+  <header class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-xl mx-auto px-4 py-3 text-center">
+      <h1 class="text-xl sm:text-2xl font-extrabold tracking-wide drop-shadow-sm">Ruang Ayat Beraksi</h1>
+      
+      <!-- Indicator Navigasi -->
+      <div class="flex items-center justify-center gap-2 mt-3 text-xs sm:text-sm font-semibold">
+        <button id="nav-step1" onclick="goToStep(1)" class="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 text-white transition">
+          <span class="w-5 h-5 flex items-center justify-center rounded-full bg-white text-indigo-600 text-xs font-bold">1</span> Game
+        </button>
+        <span class="text-white/40">➔</span>
+        <button id="nav-step2" onclick="goToStep(2)" disabled class="flex items-center gap-1 px-3 py-1 rounded-full bg-black/20 text-white/50 cursor-not-allowed transition">
+          <span class="w-5 h-5 flex items-center justify-center rounded-full bg-white/40 text-indigo-900 text-xs font-bold">2</span> Video
+        </button>
+        <span class="text-white/40">➔</span>
+        <button id="nav-step3" onclick="goToStep(3)" disabled class="flex items-center gap-1 px-3 py-1 rounded-full bg-black/20 text-white/50 cursor-not-allowed transition">
+          <span class="w-5 h-5 flex items-center justify-center rounded-full bg-white/40 text-indigo-900 text-xs font-bold">3</span> Refleksi
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-xl w-full mx-auto p-4 flex-grow flex flex-col justify-center">
+
+    <!-- STEP 1: GAME TIMBANGAN -->
+    <section id="step1" class="fade-in bg-white rounded-3xl p-5 shadow-xl border border-slate-200">
+      <div class="text-center mb-4">
+        <span id="level-badge" class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Level 1 dari 3</span>
+        <h2 class="text-lg font-bold text-slate-800 mt-1">Takar Buah Sampai Seimbang!</h2>
+        <p class="text-xs text-slate-500">Pilih buah di bawah agar berat timbangan kanan pas dengan target.</p>
+      </div>
+
+      <!-- VISUAL TIMBANGAN -->
+      <div class="relative w-full h-48 bg-slate-50 rounded-2xl p-2 border border-slate-100 flex flex-col justify-end items-center overflow-hidden mb-4">
+        
+        <!-- Tuas Utama (Beam) -->
+        <div id="scale-beam" class="scale-beam absolute top-16 w-3/4 h-2 bg-slate-700 rounded-full flex justify-between items-center px-1">
+          
+          <!-- Piringan Kiri (Target) -->
+          <div class="relative -ml-6 -mt-1 flex flex-col items-center">
+            <div class="w-0.5 h-16 bg-slate-400"></div>
+            <div class="w-24 sm:w-28 h-10 bg-amber-400 rounded-b-full border-b-4 border-amber-600 flex items-center justify-center shadow-md">
+              <span id="target-weight-display" class="text-xs font-extrabold text-amber-950 bg-amber-200 px-2 py-0.5 rounded-md">Target: 0kg</span>
+            </div>
+          </div>
+
+          <!-- Piringan Kanan (Pilihan Siswa) -->
+          <div class="relative -mr-6 -mt-1 flex flex-col items-center">
+            <div class="w-0.5 h-16 bg-slate-400"></div>
+            <div class="w-24 sm:w-28 h-10 bg-indigo-400 rounded-b-full border-b-4 border-indigo-600 flex items-center justify-center shadow-md">
+              <span id="current-weight-display" class="text-xs font-extrabold text-indigo-950 bg-indigo-200 px-2 py-0.5 rounded-md">Saat ini: 0kg</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tiang Penyangga Timbangan -->
+        <div class="w-4 h-24 bg-slate-600 rounded-t-lg z-0"></div>
+        <div class="w-20 h-4 bg-slate-800 rounded-t-xl z-0"></div>
+      </div>
+
+      <!-- KANTONG BUAH TERPILIH -->
+      <div class="mb-4">
+        <div class="text-xs font-semibold text-slate-500 mb-1 flex justify-between items-center">
+          <span>Buah di Timbangan Kanan:</span>
+          <button onclick="resetFruit()" class="text-xs text-rose-500 underline font-bold active:scale-95">Kosongkan</button>
+        </div>
+        <div id="selected-fruits" class="min-h-[44px] bg-slate-100 rounded-xl p-2 flex flex-wrap gap-1 items-center justify-center border border-dashed border-slate-300 text-xs text-slate-400">
+          Belum ada buah dipilih
+        </div>
+      </div>
+
+      <!-- PILIHAN BUAH (TOUCH FRIENDLY) -->
+      <div class="grid grid-cols-4 gap-2 mb-4">
+        <button onclick="addFruit('Apel', 1, '🍎')" class="bg-red-50 hover:bg-red-100 active:scale-95 border border-red-200 rounded-2xl p-2 flex flex-col items-center transition shadow-sm">
+          <span class="text-2xl">🍎</span>
+          <span class="text-xs font-bold text-slate-700 mt-1">Apel</span>
+          <span class="text-[10px] text-red-500 font-extrabold">1 kg</span>
+        </button>
+        <button onclick="addFruit('Jeruk', 2, '🍊')" class="bg-orange-50 hover:bg-orange-100 active:scale-95 border border-orange-200 rounded-2xl p-2 flex flex-col items-center transition shadow-sm">
+          <span class="text-2xl">🍊</span>
+          <span class="text-xs font-bold text-slate-700 mt-1">Jeruk</span>
+          <span class="text-[10px] text-orange-500 font-extrabold">2 kg</span>
+        </button>
+        <button onclick="addFruit('Mangga', 3, '🥭')" class="bg-amber-50 hover:bg-amber-100 active:scale-95 border border-amber-200 rounded-2xl p-2 flex flex-col items-center transition shadow-sm">
+          <span class="text-2xl">🥭</span>
+          <span class="text-xs font-bold text-slate-700 mt-1">Mangga</span>
+          <span class="text-[10px] text-amber-600 font-extrabold">3 kg</span>
+        </button>
+        <button onclick="addFruit('Semangka', 5, '🍉')" class="bg-emerald-50 hover:bg-emerald-100 active:scale-95 border border-emerald-200 rounded-2xl p-2 flex flex-col items-center transition shadow-sm">
+          <span class="text-2xl">🍉</span>
+          <span class="text-xs font-bold text-slate-700 mt-1">Semangka</span>
+          <span class="text-[10px] text-emerald-600 font-extrabold">5 kg</span>
+        </button>
+      </div>
+
+      <!-- STATUS & TOMBOL PROSES -->
+      <div id="game-status" class="hidden text-center p-3 mb-3 rounded-xl font-bold text-sm"></div>
+
+      <button id="btn-next-video" onclick="goToStep(2)" class="hidden w-full bg-emerald-500 hover:bg-emerald-600 active:scale-98 text-white font-extrabold py-3 rounded-2xl shadow-lg transition text-base flex items-center justify-center gap-2">
+        <span>🎉 Menang! Tonton Video</span> ➔
+      </button>
+    </section>
+
+    <!-- STEP 2: VIDEO PEMBELAJARAN -->
+    <section id="step2" class="hidden fade-in bg-white rounded-3xl p-5 shadow-xl border border-slate-200">
+      <div class="text-center mb-3">
+        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Materi Video</span>
+        <h2 class="text-lg font-bold text-slate-800 mt-1">Simak Video Pembelajaran</h2>
+        <p class="text-xs text-slate-500">Tonton video hingga selesai untuk melanjutkan ke tahapan refleksi.</p>
+      </div>
+
+      <!-- VIDEO EMBED CONTAINER -->
+      <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-inner mb-4">
+        <iframe 
+          src="[https://drive.google.com/file/d/1Uneyb1rQ8mD87GnvxCMOYB4H2vTE7Btl/preview](https://drive.google.com/file/d/1Uneyb1rQ8mD87GnvxCMOYB4H2vTE7Btl/preview)" 
+          class="w-full h-full border-0" 
+          allow="autoplay; encrypted-media" 
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- OPSI BUKA VIDEO EXTERNAL JIKA ERROR DI HP -->
+      <div class="text-center mb-4">
+        <a href="[https://drive.google.com/file/d/1Uneyb1rQ8mD87GnvxCMOYB4H2vTE7Btl/view?usp=sharing](https://drive.google.com/file/d/1Uneyb1rQ8mD87GnvxCMOYB4H2vTE7Btl/view?usp=sharing)" target="_blank" class="text-xs text-indigo-600 underline font-semibold">
+          Video tidak bisa diputar? Buka di Aplikasi Google Drive
+        </a>
+      </div>
+
+      <!-- NAVIGASI KELANJUTAN -->
+      <button onclick="goToStep(3)" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition text-base flex items-center justify-center gap-2">
+        <span>Lanjut ke Refleksi</span> ➔
+      </button>
+    </section>
+
+    <!-- STEP 3: FORM REFLEKSI -->
+    <section id="step3" class="hidden fade-in bg-white rounded-3xl p-5 shadow-xl border border-slate-200">
+      <div class="text-center mb-3">
+        <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tahap Akhir</span>
+        <h2 class="text-lg font-bold text-slate-800 mt-1">Lembar Refleksi Siswa</h2>
+        <p class="text-xs text-slate-500">Isi formulir refleksi di bawah berdasarkan pemahaman Anda.</p>
+      </div>
+
+      <!-- FORM EMBED -->
+      <div class="w-full h-[380px] sm:h-[450px] rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 mb-4">
+        <iframe 
+          src="[https://forms.gle/Ue9yKEqdFfvzi2c68](https://forms.gle/Ue9yKEqdFfvzi2c68)" 
+          class="w-full h-full border-0">
+          Memuat...
+        </iframe>
+      </div>
+
+      <!-- TOMBOL KEMBALI KE VIDEO & BUKA FORM EXTERNAL -->
+      <div class="flex flex-col gap-2">
+        <a href="[https://forms.gle/Ue9yKEqdFfvzi2c68](https://forms.gle/Ue9yKEqdFfvzi2c68)" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white text-center font-bold py-3 rounded-xl shadow transition text-sm">
+          Buka Form di Tab Baru (Aplikasi)
+        </a>
+
+        <!-- TOMBOL REVISI: KEMBALI KE VIDEO -->
+        <button onclick="goToStep(2)" class="w-full bg-slate-200 hover:bg-slate-300 active:scale-98 text-slate-700 font-bold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
+          ⬅️ Kembali ke Video (Tonton Ulang)
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-3 text-xs text-slate-400">
+    Ruang Ayat Beraksi &copy; 2026 - Media Belajar Interaktif
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // System State
+    let currentStep = 1;
+    let unlockedSteps = [1];
+    
+    // Game Levels Data
+    const levels = [
+      { level: 1, target: 5 },
+      { level: 2, target: 8 },
+      { level: 3, target: 11 }
+    ];
+    let currentLevelIdx = 0;
+    let currentWeight = 0;
+    let selectedFruitList = [];
+
+    // Initialize Game
+    function initGame() {
+      const target = levels[currentLevelIdx].target;
+      document.getElementById('level-badge').innerText = `Level ${currentLevelIdx + 1} dari ${levels.length}`;
+      document.getElementById('target-weight-display').innerText = `Target: ${target}kg`;
+      resetFruit();
+    }
+
+    function addFruit(name, weight, icon) {
+      selectedFruitList.push({ name, weight, icon });
+      currentWeight += weight;
+      updateGameUI();
+    }
+
+    function resetFruit() {
+      selectedFruitList = [];
+      currentWeight = 0;
+      updateGameUI();
+    }
+
+    function updateGameUI() {
+      const target = levels[currentLevelIdx].target;
+      document.getElementById('current-weight-display').innerText = `Saat ini: ${currentWeight}kg`;
+
+      // Render Basket Icons
+      const basket = document.getElementById('selected-fruits');
+      if (selectedFruitList.length === 0) {
+        basket.innerText = 'Belum ada buah dipilih';
+        basket.classList.add('text-slate-400');
+      } else {
+        basket.classList.remove('text-slate-400');
+        basket.innerHTML = selectedFruitList.map(f => `<span class="bg-white px-2 py-1 rounded-md shadow-sm text-xs border border-slate-200">${f.icon} ${f.weight}kg</span>`).join(' ');
+      }
+
+      // Calculate Tilt Angle for Visual Balance
+      const diff = currentWeight - target;
+      let angle = diff * 3; // 3deg tilt per kg difference
+      if (angle > 15) angle = 15;
+      if (angle < -15) angle = -15;
+
+      document.getElementById('scale-beam').style.transform = `rotate(${angle}deg)`;
+
+      // Check Win Condition
+      const statusDiv = document.getElementById('game-status');
+      const btnNext = document.getElementById('btn-next-video');
+
+      if (currentWeight === target) {
+        statusDiv.classList.remove('hidden', 'bg-rose-100', 'text-rose-700');
+        statusDiv.classList.add('bg-emerald-100', 'text-emerald-800');
+        
+        if (currentLevelIdx < levels.length - 1) {
+          statusDiv.innerText = `✅ Pas! Level ${currentLevelIdx + 1} Selesai. Lanjut ke level berikutnya...`;
+          setTimeout(() => {
+            currentLevelIdx++;
+            initGame();
+          }, 1200);
+        } else {
+          statusDiv.innerText = `🎉 Selamat! Semua pesanan berhasil ditakar dengan seimbang!`;
+          btnNext.classList.remove('hidden');
+          triggerConfetti();
+          unlockStep(2);
+        }
+      } else if (currentWeight > target) {
+        statusDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800');
+        statusDiv.classList.add('bg-rose
